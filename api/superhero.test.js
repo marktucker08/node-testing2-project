@@ -40,6 +40,16 @@ describe('test superhero model creates a new hero in the db', ()=> {
     })
 })
 
+describe('testing GET endpoint', ()=> {
+    test('get request returns heros', async ()=> {
+        await Hero.create(hero1)
+        await Hero.create(hero2)
+        let heros = await Hero.getHeros()
+        expect(heros).toBeTruthy()
+        expect(heros).toHaveLength(2)
+    })
+})
+
 describe('testing Delete endpoint', () => {
     test('Delete a hero', async ()=> {
         const [hero_id] = await db('superheros').insert(hero1)
